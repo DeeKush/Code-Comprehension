@@ -1,0 +1,95 @@
+{
+  "name": "codebase-detective",
+  "displayName": "Codebase Detective",
+  "description": "A workspace-aware AI coding companion and interview lab for VS Code",
+  "version": "0.2.0",
+  "publisher": "codebase-detective",
+  "private": true,
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onCommand:codebaseDetective.open",
+    "onCommand:codebaseDetective.openInterviewLab",
+    "onCommand:codebaseDetective.openActiveInterview",
+    "onCommand:codebaseDetective.newChat",
+    "onCommand:codebaseDetective.configureGroq",
+    "onCommand:codebaseDetective.testGroq",
+    "onCommand:codebaseDetective.removeGroqKey",
+    "onView:codebaseDetective.files",
+    "onView:codebaseDetective.assistant"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "codebaseDetective.open",
+        "title": "Codebase Detective: Open Assistant"
+      },
+      {
+        "command": "codebaseDetective.newChat",
+        "title": "Codebase Detective: New Chat"
+      },
+      {
+        "command": "codebaseDetective.openInterviewLab",
+        "title": "Codebase Detective: Open Interview Lab"
+      },
+      {
+        "command": "codebaseDetective.openActiveInterview",
+        "title": "Codebase Detective: Open Active Interview Workspace"
+      },
+      {
+        "command": "codebaseDetective.configureGroq",
+        "title": "Codebase Detective: Configure Groq API Key"
+      },
+      {
+        "command": "codebaseDetective.testGroq",
+        "title": "Codebase Detective: Test Groq Connection"
+      },
+      {
+        "command": "codebaseDetective.removeGroqKey",
+        "title": "Codebase Detective: Remove Groq API Key"
+      }
+    ],
+    "configuration": {
+      "title": "Codebase Detective",
+      "properties": {
+        "codebaseDetective.groqModel": {
+          "type": "string",
+          "default": "openai/gpt-oss-120b",
+          "description": "Groq model ID for interview assistance and qualitative assessment."
+        }
+      }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "codebaseDetective.files",
+          "name": "Challenge Files"
+        },
+        {
+          "id": "codebaseDetective.assistant",
+          "name": "Codebase Detective Assistant",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "vite build --config ui/vite.config.js",
+    "watch": "vite build --watch --config ui/vite.config.js",
+    "test": "node --test tests/*.test.js",
+    "check": "npm run build && npm test",
+    "package": "npm run build && vsce package --no-rewrite-relative-links --allow-missing-repository --skip-license"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vscode/vsce": "^3.2.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^5.4.11"
+  }
+}
